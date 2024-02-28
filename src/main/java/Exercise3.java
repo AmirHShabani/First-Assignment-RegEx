@@ -11,7 +11,9 @@ public class Exercise3 {
     */
 
     public static String extractURL(String text) {
-        String regex = "write your regex pattern here!";  // TODO
+        // find any text that starts with either “http” or “https”, 
+        // followed by “://”, and then any number of non-whitespace characters. 
+        String regex = "(http|https)://[^\\s]*"; 
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(text);
@@ -29,8 +31,19 @@ public class Exercise3 {
      */
 
     public static boolean validateEmail(String email) {
-        // TODO
-        return false;
+        // any text that starts with one or more alphanumeric characters, etc. 
+        // followed by an @, and then one or more of any character. 
+        String validationRegex = "^[A-Za-z0-9+_.-]+@(.+)$"; 
+
+        Pattern pattern = Pattern.compile(validationRegex); 
+        Matcher matcher = pattern.matcher(email);
+
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false; 
+        }
+
     }
 
     /*
@@ -39,8 +52,18 @@ public class Exercise3 {
 
     public static List<String> findWordsWithRepeatLetters(String input) {
         List<String> wordsWithRepeatLetters = new ArrayList<>();
+        // any text that starts and ends with a word boundary.
+        String regex = "\\b\\w*(\\w)\\1+\\w*\\b";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(input);
+
+        while (matcher.find()) {
+            wordsWithRepeatLetters.add(matcher.group());
+        }
+
+
         return wordsWithRepeatLetters;
-        // TODO
     }
 
     /*
